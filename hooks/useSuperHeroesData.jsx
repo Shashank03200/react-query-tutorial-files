@@ -36,30 +36,44 @@ const useSuperHeroesData = (onSuccessHandler, onErrorHandler) => {
 };
 
 const addSuperHero = (hero) => {
-  return axios.post('http://localhost:4000/superheroes', hero);
+  return axios.post('http://localhost:4000/superheroes2', hero);
 };
 
 export const useAddSuperheroData = () => {
   const queryClient = useQueryClient();
   return useMutation(addSuperHero, {
-    onSuccess: (data) => {
-      // data refers to the entire response of the post request
-      /** Query Invalidation Start */
-      console.log('Add success');
-      // queryClient.invalidateQueries('super-heroes');
-      /** Query Invalidation End */
+    onMutate: async (newHero) => {
+      //* This callback is called before the mutation function is called and passed the same arguments as passed in mutation function
 
-      //! Step 1 : Update query data.
+      //* Cancel outgoing refetches to avoid overrides
+      await queryClient.cancelQueries('super-heroes');
+      const previousHeroData = queryClient.getQueryData('super-heroes');
+
+      //* Update the data in query client
       queryClient.setQueryData('super-heroes', (oldQueryData) => {
-        //! Step 2 : update the query data by appending the data response with the old query data
-        console.log('data', data);
-        console.log('oldQueryData', oldQueryData);
-
         return {
           ...oldQueryData,
-          data: [...oldQueryData.data, data.data],
+          //! also need to insert id with new data in
+          //TODO OPTIMISTIC UPDATES
+          data: [
+            ...oldQueryData.data,
+            {
+              id: oldQueryData?.data?.length + 1,
+              ...newHero,
+            },
+          ],
         };
       });
+
+      return {
+        previousHeroData,
+      };
+    },
+    onError: (_error, _home, context) => {
+      queryClient.setQueryData('super-heroes', context.previousHeroData);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries('super-heroes');
     },
   });
 };

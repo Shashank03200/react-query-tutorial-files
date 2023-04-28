@@ -34,6 +34,51 @@
       "name": "Goldman",
       "alterEgo": "Goldman Sachs",
       "id": 7
+    },
+    {
+      "name": "Iron Man ",
+      "alterEgo": "Tony Stark",
+      "id": 8
+    },
+    {
+      "name": "Iron Man ",
+      "alterEgo": "Tony Stark",
+      "id": 9
+    },
+    {
+      "name": "Iron Man ",
+      "alterEgo": "Tony Stark",
+      "id": 10
+    },
+    {
+      "name": "Iron Man ",
+      "alterEgo": "Tony Stark",
+      "id": 11
+    },
+    {
+      "name": "Iron Man ",
+      "alterEgo": "Tony Stark",
+      "id": 12
+    },
+    {
+      "name": "The Flash 2",
+      "alterEgo": "Barry Allen",
+      "id": 13
+    },
+    {
+      "name": "The Hulk",
+      "alterEgo": "Bruce Banner",
+      "id": 14
+    },
+    {
+      "name": "The Hulk",
+      "alterEgo": "Bruce Banner",
+      "id": 15
+    },
+    {
+      "name": "Natasha Romanoff",
+      "alterEgo": "Natalie Portman",
+      "id": 16
     }
   ],
   "friends": [

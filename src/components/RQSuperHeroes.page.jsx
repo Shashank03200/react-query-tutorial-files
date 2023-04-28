@@ -83,17 +83,14 @@ const RQSuperHeroes = () => {
       </form>
 
       <button>Fetch superheroes</button>
-      {superheroesFetching ? (
-        <p>Loading....</p>
-      ) : (
-        <div>
-          {superheroesData?.data?.map((hero) => (
-            <li key={hero.id}>
-              <Link to={`/rq-super-heroes/${hero.id}`}>{hero.name}</Link>
-            </li>
-          ))}
-        </div>
-      )}
+
+      <div>
+        {superheroesData?.data?.map((hero) => (
+          <li key={hero.id}>
+            <Link to={`/rq-super-heroes/${hero.id}`}>{hero.name}</Link>
+          </li>
+        ))}
+      </div>
     </>
   );
 };
